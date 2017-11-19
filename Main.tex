@@ -1,0 +1,79 @@
+\input{preamble.tex}
+\addbibresource{kilder.bib}
+\begin{document}
+	\author{Thomas Aarflot Storaas\\
+		\textbf{Github: \href{https://github.com/thoast/Project_4}{Projectfolder}}}
+	\title{Project 4\\ a study of magnetic systems and phase transitions}
+	\maketitle
+
+\tableofcontents
+
+\abstract{The two dimensional Ising model was studied using Monte Carlo simulations with the Metropolis algorithm. As a reference both analytical and numerical approaches to a $2\times2$ lattice. There was a good correspondence between the numerical and analytical values. Convergence of the system was reached when an approximate $10^5$ cycles was done. The system was expanded to a lattice consisting of $20\times 20$ points and further analysis was done varying the temperature of the system. The temperature was increased above the critical temperature of the system, and the phase transition and critical temperature was found to be consistent with online values for the phase transition of the system.$T_c=2.2699$}
+
+
+
+%introduction
+
+\include{Introduction/Introduction}
+
+
+%model theory
+
+\include{Physicaltheory/Physicaltheory}
+
+
+
+
+
+
+
+
+
+
+
+
+%algorithm theory
+
+\include{Computationaltheory/Computationaltheory}
+
+
+
+
+
+
+
+
+
+
+%implementation
+\include{Implementation/Implementation}
+
+
+
+
+
+
+
+
+
+%result
+\include{result/result}
+
+
+
+
+
+
+
+
+%conclusion
+\include{Conclusion/Conclusion}
+
+
+
+
+
+\printbibliography
+
+
+\end{document}

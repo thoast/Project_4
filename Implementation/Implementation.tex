@@ -1,0 +1,9 @@
+\section{Implementation}
+
+The Metropolis algorithm was implemented in the program called main\_\_\_.cpp where the underscores gives different versions of the program main.cpp. The different versions has different ways to write to file.
+
+
+The structure of the Metropolis algorithm makes is possible to parallelize some of the tasks. The parallelization utilizes the structure of the metropolis algorithm though it being possible to work in many parts at the same time. The overall tasks will still be the same so a great del of the code in the parallelized and non parallelized versions will be the same. The parallelization saves some time for the user, but requires more threads to do. Each thread has a unique number(rank), this makes it possible to use this tag to give out the temperature each thread is working with. I have chosen to implement MPI.
+
+
+

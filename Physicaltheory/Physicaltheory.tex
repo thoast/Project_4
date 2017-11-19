@@ -1,0 +1,117 @@
+
+\section{Statistical and Model theory}
+\subsection{Ising Model}
+The Ising model assumes a system where only the nearest neighbors affect each other. The system can take any dimensionality it wants, in this case it is given in two. The Ising model is applied to a ferromagnetic material. As a common notation the two possible states $\pm1$ is exchanged with a more visually pleasing $\uparrow$ for spin $1$ and $\downarrow$ for spin $-1$. In its simplest form the energy of the Ising model is expressed as 
+
+\begin{align}
+	E=-J\sum_{\langle ij\rangle} s_is_j\label{energy}
+\end{align}
+
+The subscript denotes a summation over all the nearest neighbors. The physical interpretation of this summation and the possible states is given by the value of $j$. If the sum become negative the spins are antiparallell and is called antiferroelectric. If the sum become positive the spins are parallel and is called ferroelectric. The energy in this case is not a energy determening the stability of the crystalline material but rather the stability of the spin states\cite{ferromagnetism}.
+
+
+A comment about the boundary condition has to be made. In the summation above it is assumed to always have surrounding neighbors on all sides. This is an assumption that is not true for all particles. Some particles will always lie in the outermost position in the crystal and therefore have nothing on one side. So to prevent having to expand the system to a infinite grid, where there would be impossible to find a numerical solution, one introduces periodic boundary conditions. This is a "cheat code" workaround. This condition removes the edges and assumes that the neighboring state to the last row of states is the first one. Thereby giving all atoms neighbors without having to expand the system to an infinitely large one.
+
+
+
+
+
+
+\subsection{Statistical physics}
+
+As stated in the introduction there is a problem in finding the analytical solution for every case. The statistical physics behind this model uses the boltzmann distribution  for the microstates. This distribution normalized gives the probability of a system being at a state with a spesific energy
+
+\begin{align}
+	P(E_i)=\frac{1}{Z}e^{-E_i/k_bT}\label{probability}
+\end{align}
+Here it is common to rewrite $k_bT$ as $\beta$. The term $Z$ is the normalization constant, also called the partition function, which is the problem to calculate in this model. As per usual the sum over all energy states gives $\sum_iP(E_i)=1$. Rewriting this gives a analytical expression for the partition function:
+\begin{align*}
+	1=&\sum_i{1}^{Z}e^{-E_i \beta}\\
+	Z=&\sum_i{1}^{Z}e^{-E_i \beta}
+\end{align*}
+
+The energy of the system is defined as
+\begin{align}
+	E=\pdv{\ln(Z)}{\beta}\label{defenergy}
+\end{align}
+
+Another quantity needed is the expectation value of energy and the magnetization in the system. In general this can be defined as the value of the system times the probability of the system being in that state. There are two common ways of denoting expectation value, $\mathbf{E}(f(x))=\langle f(x)\rangle $. In this project $\langle f(x)\rangle $ will be used throughout. 
+
+\begin{align}
+	\langle E \rangle= \sum_iE_iP(E_i)\label{expectationvalue}
+\end{align}
+
+And similarly for the magnetic moment
+
+\begin{align}
+\langle |M| \rangle= \sum_iM_iP(E_i)\label{expectationvalue_}
+\end{align}
+
+Expressions for the magnetic susceptibility and heat capacity is given in the lecturenotes on page 421\cite{compphys}. 
+\begin{align}
+&\langle C_V \rangle = \frac{1}{k T^2}
+\left(
+\langle E^2 \rangle - \langle E \rangle ^2
+\right)
+\label{eq:cv}
+\\
+&\langle \chi \rangle = \frac{1}{kT} 
+\left(
+\langle M^2 \rangle - \langle |M| \rangle ^2
+\right)
+\label{eq:chi}
+\end{align}
+
+
+
+\subsection{phase transitions}
+
+One of the effects studied in this project is phase transitions. Phase transitions is an a effect that occurs first in two dimensions. This is one of the reasons why a two dimensional system was chosen in this project.
+
+A phase transition is the effect occurring when heating a material above a specific temperature. Ferromagnetic materials heated above a specific temperature gives an effect called ferromagnetic breakdown (critical temperature) \cite{ferromagnetism}. Above this temperature the system has no magnetic moment and is within the paramagnet domain. This effect is difficult to calculate numerically so more easily calculated quantities are analyzed instead. Two coupled parameters that is easier to numerically calculate is the magnetic susceptibility and the heat capacity. Both the magnetic susceptibility and the heat capacity has their maximums at the critical temperature.
+
+The magnetic susceptibility is given as\cite{compphys} 
+\begin{align}
+	\chi(T)\sim\abs{T_c-T}^{-\gamma}
+\end{align}
+The interesting point for the temperature is when $T=T_c$.This leads to a division by zero.For the heat capacity
+\begin{align*}
+	C_v(T)\sim\abs{T_c-T}^{-\alpha}
+\end{align*}
+
+An important quantity for phase transitions is the correlation length. For a second-order phase transition is the correlation length equal the length of the system. The explicit value of $T_C$ can be found through finite size scaling. The critical temperature has then the following form and scales as:
+
+\begin{align}
+&T_C (L) - T_C (L=\infty) = a L^{\frac{-1}{v}}
+\label{eq:tc}
+\end{align}
+
+Here $a$ is a constant. To isolate $a$ as a variable the equation above is used with two different inputs, $L_i$ and $L_j$. The difference between the two expressions are used to factor out $a$:
+
+
+\begin{align*}
+&T_C (L_i) - T_C (L_j) = a 
+\left(
+L_i^{\frac{-1}{v}}-L_j^{\frac{-1}{v}}
+\right)
+\end{align*}
+\begin{align}
+&a = 
+\frac{T_C (L_i) - T_C (L_j)} 
+{
+	L_i^{\frac{-1}{v}}-L_j^{\frac{-1}{v}}
+} \label{eq:find-a}
+\end{align}
+
+Now this can be reintroduced into the equation with $L=\infty$ to find the expression for the Critical temperature:
+
+\begin{align*}
+&T_C (L) - T_C (L=\infty) = a L^{\frac{-1}{v}}
+\end{align*}
+\begin{align}
+&T_C (L=\infty) = T_C (L) -  \frac{T_C (L_i) - T_C (L_j)} 
+{
+	L_i^{\frac{-1}{v}}-L_j^{\frac{-1}{v}}
+} \label{eq:t-c}
+L^{\frac{-1}{v}}
+\end{align}

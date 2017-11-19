@@ -1,0 +1,71 @@
+\section{Algorithm theory}
+
+The Monte Carlo method, which is used in this project, is a method that utilizes the fact that a large number of experiments converges towards the expectation value. Using a random number generator(RNG) combined with probabilities to "preform" an experiment. This method is implemented with the Metropolis Algorithm instead of preforming the calculation needed to find the explicit value of the partition function due to it being, as mentioned, computing heavy.
+
+The chosen work around is to look at the result that is wanted from the Boltzmann function. The most common way to exclude an unknown variable is by looking at rations in stead of a specific value.
+\begin{align}
+	\Delta E=\frac{P(E_1)}{P(E_2)}=\frac{\frac{e^{-\beta E_1}}{Z}}{e\frac{e^{-\beta E_2}}{Z}}=e^{-\Delta E\beta}\label{deltaBoltsmann}
+\end{align}
+
+The algorithm wants to find the minimum value for Helmholtz free energy, as outlined in the previous section. If the energy decreases this leads to a more stable state and should automatically be excepted. This is the easy part, the more difficult choice is when the energy increases. The system needs a way to take into account the entropy of the system. So the system has to do a random choice of acceptance or denial of the new state with higher energy. This random choice is done with the Random Number Generator. A random number i created between $(0-1)$ If the number is less than the energy change accept the new state. If the number is greater than the energy change then discard the change. The procedure is outlined in four(five) steps.
+
+\begin{itemize}
+	\item Chose a spin at random. Create a potential case where this spin is flipped.
+	\item Find the energy for this new case
+	\item If the change in energy is negative flip the spin, skip the next step accept the new state. 
+	\item If the energy is positive, a RNG is used to chose a number between $(0-1)$. Now if the energy is less then the RNG number, reject the spin flip and discard the change. If not, accept the change.
+	\item Update the system with the changed state.
+\end{itemize}
+
+
+
+\begin{comment}
+For fun, a simple flow chart of the operations was made, mainly to help my understanding, is given below.
+
+\begin{tikzpicture}[node distance = 2cm, auto]
+% Place nodes
+\node [block] (init) {initialize model};
+\node [block, below of=init] (identify) {Choose one spin at random};
+\node [block, below of=identify] (evaluate) {Calculate the new energy};
+\node [block, left of=evaluate, node distance=3cm] (update) {Is the energy greater then a RNG value?};
+\node [decision, below of=evaluate] (decide) {Is $\Delta E$ negative?};
+\node [block, below of=decide, node distance=3cm] (stop) {Flip spin};
+\node [block, below of=stop, node distance=2cm] (finnished) {Update expectation value};
+% Draw edges
+\path [line] (init) -- (identify);
+\path [line] (identify) -- (evaluate);
+\path [line] (evaluate) -- (decide);
+\path [line] (decide) -| node [near start] {no} (update);
+\path [line] (update) -| node [near start] {yes} (stop);
+\path [line] (update) |- node {no} (identify);
+\path [line] (decide) -- node {yes}(stop);
+\path [line] (stop) -- (finnished);
+\end{tikzpicture}
+\end{comment}
+
+
+
+
+\subsection{Tricks}
+
+The strategy outlined above requires one to calculate a change in energy. This as it turns out is computationally expensive to calculate exponentials. Fortunately it is possible to circumvent this. For a two dimensional lattice it is possible to precalculate all the energy states, so when prompted to calculate the exponential it is possible to just insert the precalculated exponential. This saves some time and computing power. The change in energy and magnetic moment can be shown to be in the form \cite{compphys}:
+
+\begin{align*}
+	\Delta E=&2Js_{\text{before}}\sum_{\langle k\rangle}s_k&\Delta M=-2Js_{\text{before}}
+\end{align*}
+
+Here the sum is over the surrounding spins $j$, and the $s_{\text{before}}$ is the spin before the flip.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

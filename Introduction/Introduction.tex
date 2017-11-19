@@ -1,0 +1,10 @@
+\section{Introduction}
+This project explores the famous Ising model. The Ising model was developed by Willhelm Lenz and a one dimensional solution was developed by Ernst Ising. The model describes a coupled system were one state/particle interacts only with its nearest neighbors. The model has been applied to every thing from economic models\cite{Zhou2007} to ferromagnetic behavior of solids\cite{onsager}. In this project the Ising model is used to describe a magnetic system. 
+
+The magnetic system consists of a crystalline two dimensional material in this case given ferromagnetic properties, such as iron. Iron, which in latin is translated to ferrite, hence the name ferromagnetism, has the property to easily switch the spinn of an electron. The spin can take value $\pm1$. The spins direction will affect the closest neighbours.
+
+Finding a numerical solution to this system proves to be difficult due to the fact that it is necessary to find the explicit partition function. To calculate the partition function one has to sum over all microstates in the system. Each spin has two possible configuration, so for a square grid of five particles the total possible microstates is $2^25$. This is an extreme number of states to sum. By hand this would simply be impossible without an analytical solution. In this project an analytical solution is found for a $2\cross2$ system. This is used as a test for the program which is then expanded to numerically find the partition function for larger systems. The larges systems are then used to analyze convergence aswell as phasetransitions with varying temperature.
+
+The main part of the simulations in this program was initially run on a Windows computer with a Eon two core processor. This was change due to difficulties with the codes stability. The replacement computer used was a macbook pro 13, which also has a dual processor but it runs with intels hyper threading. This influences the results somewhat. 
+
+All the code and folders requested can be found at my github, \textbf{Github: \href{https://github.com/thoast/Project_4}{Projectfolder}}.
